@@ -1,10 +1,10 @@
 {
-  "name": "!!REPLACE-server",
+  "name": "quizes-server",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Concise Constructs LLC",
   "license": "ISC",
-  "description": "This is the server side code to manipulate the !!REPLACE data model.",
+  "description": "This is the server side code to manipulate the Quiz data model.",
   "dependencies": {
     "aws-sdk": "^2.439.0"
   },
