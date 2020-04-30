@@ -15,6 +15,38 @@ export function handler(incomingRequest:IDeleteRequest, context:Context, callbac
       super(incomingRequest, context, callback)
     }
 
+    protected async performActions() {
+      await this.getRecordForExamination()
+      this.examineLinksForUnlinking()
+      Promise.all([
+        this.unlinkRecordPromises,
+        this.db.delete(this.makeDeleteSyntax()).promise()
+      ])
+        .then(result => this.onFirstStageComplete(result))
+        .catch(error => this.hasFailed(error))
+    }
+
+
+
+
+        private onFirstStageComplete(result) {
+          this.requestRemoveScheduledJobs()
+          this.hasSucceeded(result)
+        }
+
+
+
+
+            private requestRemoveScheduledJobs() {
+              this.lambda.invoke({
+                FunctionName: `Schedule-${ process.env.stage }-remove-boundTo`,
+                Payload: JSON.stringify({
+                  accountId: this.request.accountId,
+                  id: this.request.id
+                })
+              }).promise()
+            }
+
 
   } // End Handler Class ---------
 
