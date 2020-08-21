@@ -10,7 +10,7 @@ provider:
   environment: ${self:custom.environments.${opt:stage, 'DEV'}}
 
 custom:
-  saasName: 'qa'
+  saasName: 'iqqa'
   pathToHandler: "compiled/src"
   pathToJSFile: "src"
   accessKeyId: ${ssm:concise-accessKeyId~true}
@@ -68,113 +68,14 @@ package:
 
 functions:
 
-  read-all:
-    handler: ${self:custom.pathToHandler}/read-all.handler
+  read:
+    handler: ${self:custom.pathToHandler}/read.handler
     package:
       include:
-      - "${self:custom.pathToJSFile}/read-all.js"
+      - "${self:custom.pathToJSFile}/read.js"
     events:
       - http:
-          path: read-all
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-isExactly:
-    handler: ${self:custom.pathToHandler}/read-isExactly.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isExactly.js"
-    events:
-      - http:
-          path: read-isExactly
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-beginsWith:
-    handler: ${self:custom.pathToHandler}/read-beginsWith.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-beginsWith.js"
-    events:
-      - http:
-          path: read-beginsWith
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-
-  read-isBetween:
-    handler: ${self:custom.pathToHandler}/read-isBetween.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isBetween.js"
-    events:
-      - http:
-          path: read-isBetween
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-isGreaterOrEqual:
-    handler: ${self:custom.pathToHandler}/read-isGreaterOrEqual.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isGreaterOrEqual.js"
-    events:
-      - http:
-          path: read-isGreaterOrEqual
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-isGreaterThan:
-    handler: ${self:custom.pathToHandler}/read-isGreaterThan.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isGreaterThan.js"
-    events:
-      - http:
-          path: read-isGreaterThan
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-isLessOrEqual:
-    handler: ${self:custom.pathToHandler}/read-isLessOrEqual.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isLessOrEqual.js"
-    events:
-      - http:
-          path: read-isLessOrEqual
-          method: get
-          cors: true
-    tags:
-      type: api
-
-
-  read-isLessThan:
-    handler: ${self:custom.pathToHandler}/read-isLessThan.handler
-    package:
-      include:
-      - "${self:custom.pathToJSFile}/read-isLessThan.js"
-    events:
-      - http:
-          path: read-isLessThan
+          path: read
           method: get
           cors: true
     tags:
