@@ -1,17 +1,16 @@
-import { UpdateHandler } from '../lib/classes/crud/UpdateHandler.class'
-import { IUpdateRequest } from '../lib/interfaces/icrud/IUpdateRequest.interface'
-import { IResponse } from '../lib/classes/lambdahandler/Response.class'
+import { UpdateHandler, TApiUpdateRequest } from '../lib/LambdaClasses/AbstractUpdateOperation'
+import { TApiResponse } from '../lib/LambdaClasses/Response.class'
 import { Context, Callback } from 'aws-lambda'
 
 
-export function handler(incomingRequest:IUpdateRequest, context:Context, callback:Callback) {
+export function handler(incomingRequest:TApiUpdateRequest, context:Context, callback:Callback) {
 
   class HandlerObject extends UpdateHandler {
-    protected request:IUpdateRequest
-    protected response:IResponse
+    protected request:TApiUpdateRequest
+    protected response:TApiResponse
 
 
-    constructor(incomingRequest:IUpdateRequest, context:Context, callback:Callback) {
+    constructor(incomingRequest:TApiUpdateRequest, context:Context, callback:Callback) {
       super(incomingRequest, context, callback)
     }
 

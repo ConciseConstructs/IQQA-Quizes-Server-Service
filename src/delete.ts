@@ -1,17 +1,16 @@
-import { DeleteHandler } from '../lib/classes/crud/DeleteHandler.class'
-import { IDeleteRequest } from '../lib/interfaces/icrud/IDeleteRequest.interface'
-import { IResponse } from '../lib/classes/lambdahandler/Response.class'
+import { DeleteHandler, TApiDeleteRequest } from '../lib/LambdaClasses/AbstractDeleteOperation'
+import { TApiResponse } from '../lib/LambdaClasses/Response.class'
 import { Context, Callback } from 'aws-lambda'
 
 
-export function handler(incomingRequest:IDeleteRequest, context:Context, callback:Callback) {
+export function handler(incomingRequest:TApiDeleteRequest, context:Context, callback:Callback) {
 
   class HandlerObject extends DeleteHandler {
-    protected request:IDeleteRequest
-    protected response:IResponse
+    protected request:TApiDeleteRequest
+    protected response:TApiResponse
 
 
-    constructor(incomingRequest:IDeleteRequest, context:Context, callback:Callback) {
+    constructor(incomingRequest:TApiDeleteRequest, context:Context, callback:Callback) {
       super(incomingRequest, context, callback)
     }
 
